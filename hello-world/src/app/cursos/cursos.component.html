@@ -1,0 +1,16 @@
+<p>
+    Lista de cursos do portal {{nomePortal}}
+</p>
+<app-curso-detalhe></app-curso-detalhe>
+
+<ul>
+    <li>Java</li>
+    <li>Angular</li>
+    <li *ngFor="let curso of cursos">{{curso}}</li>
+    <!-- diretiva ngFor
+    for (let i=0; i<this.cursos.length; i++){
+        let curso = this.cursos[i];
+    }
+    -->
+    <li *ngFor="let curso2 of cursos2">{{curso2}}</li>
+</ul>
