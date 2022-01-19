@@ -1,10 +1,12 @@
-import { MaterializeModule } from 'angular2-materialize';
+//import 'materialize-css';
+//import { MaterializeModule } from 'angular2-materialize';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +15,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterializeModule
+    //MaterializeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
