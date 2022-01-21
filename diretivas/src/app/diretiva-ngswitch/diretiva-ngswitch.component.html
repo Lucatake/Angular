@@ -1,0 +1,43 @@
+<article>
+  <h2>[ngSwitch] e *ngSwitchCase</h2>
+  <!--diretiva estrutural-->
+  <div>
+    <nav class="navbar navbar-dark bg-dark">
+          <div class="nav navbar-nav">
+            <a class="nav-item nav-link" href="#"
+            [class.active]="aba == 'home'"
+            (click)="aba = 'home'">home</a>
+            <a class="nav-item nav-link" href="#"
+            [class.active]="aba == 'gato'"
+            (click)="aba = 'gato'">gato</a>
+            <a class="nav-item nav-link" href="#"
+            [class.active]="aba == 'cachorro'"
+            (click)="aba = 'cachorro'">cachorro</a>
+            <a class="nav-item nav-link" href="#"
+            [class.active]="aba == 'bear'"
+            (click)="aba = 'bear'">bear</a>
+          </div>
+    </nav>
+  </div>
+  <div class="container" [ngSwitch]="aba">
+    <img src="http://placekitten.com/200/200?random"
+    *ngSwitchCase="'gato'">
+    <img src="https://placedog.net/200/200?random"
+    *ngSwitchCase="'cachorro'">
+    <img src="https://placebear.com/200/200"
+    *ngSwitchCase="'bear'">
+    <img src="https://picsum.photos/200/200"
+    *ngSwitchDefault>
+  </div>
+
+  <!--template
+  <div class="container" [ngSwitch]="aba">
+    <template [ngSwitchCase]="'gato'">
+      <img src="http://placekitten.com/200/200?random">
+    </template>
+    <template [ngSwitchCase]="'home'" ngSwitchDefault>
+      <img src="https://picsum.photos/200/200">
+    </template>
+  </div>
+  -->
+</article>

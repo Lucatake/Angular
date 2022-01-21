@@ -1,0 +1,19 @@
+<article>
+  <h2>*ngFor</h2>
+  <!--diretiva estrutural-->
+  <h5>Lista:</h5>
+  <!--possivel realizar o for e retornar o indice-->
+  <ul>
+    <li *ngFor="let letra of lista, let i = index">{{ i }} Letra {{ letra }}</li>
+  </ul>
+
+  <!--template
+  <ul>
+    <li template="ngFor let letra of lista, let i = index">{{ i }} Letra {{ letra }}</li>
+  </ul>
+
+  <template ngFor [ngForOf]="lista" let-letra let-i="index">
+    <li>{{ i }} Letra {{ letra }}</li>
+  </template>
+  -->
+</article>

@@ -1,0 +1,21 @@
+<article>
+  <h2>ngClass</h2>
+  <!--diretiva de atributo-->
+  <h5>Favorito</h5>
+  <p>Class Binding
+    <i style="font-size: 2em" class="fa-star"
+    [class.far]="!meuFav"
+    [class.fas]="meuFav"
+    (click)="onClick()"></i>
+  </p>
+
+  <p>ngClass
+    <i style="font-size: 2em" class="fa-star"
+    [ngClass]="{
+      'far': !meuFav,
+      'fas': meuFav
+    }"
+    (click)="onClick()"></i>
+  </p>
+</article>
+

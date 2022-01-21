@@ -1,1 +1,41 @@
-<p>diretiva-ngif works!</p>
+<article>
+  <h2>*ngIF</h2>
+  <!--diretiva estrutural-->
+  <!--não existe else, apenas expressões 'negadas'-->
+  <div *ngIf="cursos.length > 0">
+    <h5>Lista de cursos:</h5>
+    <li *ngFor="let curso of cursos">{{curso}}</li>
+  </div>
+  <div *ngIf="cursos.length == 0">
+    <h5>Sem cursos.</h5>
+  </div>
+  <br>
+
+  <!--Elemento é comentado ou descomentado - cuidado com performance -> alternativa hidden-->
+  <!--[hidden]: para árvore de elementos pequenas ou caso o custo de criar a árvore seja grande (menos custoso, porém menos segurança)-->
+  <!--*ngIf: para árvore de elementos grandes-->
+  <div *ngIf="mostrarCursos">
+    <h5>Esconde ngIF.</h5>
+  </div>
+  <div *ngIf="!mostrarCursos">
+    <h5>Mostra ngIF.</h5>
+  </div>
+  <div [hidden]="!mostrarCursos">
+    <h5>Esconde Hidden.</h5>
+  </div>
+  <div [hidden]="mostrarCursos">
+    <h5>Mostra Hidden.</h5>
+  </div>
+  <button (click)="onMostrarCursos()">Mostra ou esconde cursos.</button>
+
+  <!--template
+  <template [ngIf]="mostrarCursos">
+    <h5>Template 1.</h5>
+  </template>
+
+  <div template="ngIf mostrarCursos">
+    <h5>Template 2.</h5>
+  </div>
+  -->
+</article>
+
