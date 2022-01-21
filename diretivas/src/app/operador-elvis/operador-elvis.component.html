@@ -1,0 +1,10 @@
+<article>
+  <h2>operador Elvis (?)</h2>
+  <h5>Tarefa</h5>
+  <p>Descrição: {{ tarefa.desc }}</p>
+  <!--p>Responsável: {{ tarefa.responsavel.nome }}</p-->
+  <!--p>Responsável: {{ tarefa.responsavel !=null ? tarefa.responsavel.nome : "" }}</p-->
+  <!--Verifica se objeto é null-->
+  <p>Responsável: {{ tarefa.responsavel?.nome }}</p>
+  <p>Responsável: {{ tarefa.responsavel?.user?.nome }}</p>
+  </article>

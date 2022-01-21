@@ -1,0 +1,17 @@
+<article>
+  <h2>ng-Content</h2>
+  <h5>Painel/Card</h5>
+  <div class="card">
+    <div class="card-header">
+      <!--para selecionar uma parte-->
+      <ng-content select=".titulo"></ng-content>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <!--Passar conteúdo via app component html -> vem do comnteúdo dentro do componente-->
+        <!--só ng-content passa o conteúdo todo <ng-content></ng-content>-->
+        <ng-content select=".corpo"></ng-content>
+      </blockquote>
+    </div>
+  </div>
+</article>

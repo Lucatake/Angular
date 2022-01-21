@@ -1,0 +1,51 @@
+<h2>Diretivas Customizadas</h2>
+<!--refere-se ao elemento do DOM e renderizados responsável por fazer alterações no DOM-->
+<!--diretiva de atributo/propriedade customizada-->
+<article>
+  <h4>Element Ref e Renderer</h4>
+  <h5>fundo-amarelo</h5>
+  <p style="background-color: rgb(248, 227, 109);">Texto com fundo amarelo Style.</p>
+  <p appFundoAmarelo>Texto com fundo amarelo Cutom.</p>
+  <button appFundoAmarelo>Botão Amarelo</button>
+</article>
+<br>
+<article>
+  <h4>HostListener e HostBinding</h4>
+  <h5>highlight-mouse</h5>
+  <p appHighlightMouse>Texto com highlight ao passar o mouse Cutom.</p>
+</article>
+<br>
+<article>
+  <h4>Input e Property Binding</h4>
+  <h5>highlight</h5>
+  <!--passar informações customizada para a diretiva-->
+  <!--p appHighlight [defaultBackColor]="'black'" [defaultColor]="'rgb(0, 138, 251)'"
+    [highlightBackColor]="'rgb(0, 138, 251)'" [highlightColor]="'white'">
+    Diretiva completa - texto com highlight com cores customizadas.
+  </p--> <!--enxugando o código-->
+  <p [appHighlight]="'rgb(0, 138, 251)'"
+    [defaultBackColor]="'black'" [defaultColor]="'rgb(0, 138, 251)'">
+    Diretiva completa - texto com highlight com cores customizadas.
+  </p>
+</article>
+<br>
+<!--diretiva de estrutura customizada-->
+<article>
+  <h4>ngElse</h4>
+  <h5>cursos</h5>
+    <div *ngIf="mostrarCursos">
+      <h6>Mostra ngIF.</h6>
+      <li *ngFor="let curso of cursos">{{curso}}</li>
+    </div>
+    <div *ngElse="mostrarCursos">
+      <h6>Esconde ngELSE.</h6>
+    </div>
+    <!--template [ngElse]="mostrarCursos">
+      <div>
+        <h6>Esconde template.</h6>
+      </div>
+    </template-->
+  <button (click)="onMostrarCursos()">
+    Toggle
+  </button>
+</article>
