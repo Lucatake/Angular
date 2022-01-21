@@ -10,7 +10,9 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 })
 export class OutputPropertyComponent implements OnInit {
 
+  //componente pai passe infos para o componente filho
   @Input() valor: number = 0;
+  //componente filho passe infos/eventos para o componente pai
   @Output() mudouValor = new EventEmitter(); //broadcast de eventos
 
   @ViewChild('campoInput')campoValorInput!: ElementRef; //acesso ao DOM e template

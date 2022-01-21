@@ -1,0 +1,13 @@
+<h5>Lista de Cursos</h5>
+<ul>
+  <li *ngFor="let curso of cursos">{{ curso }}</li>
+</ul>
+
+<h4>Declaração dentro do componente [receber curso criado]</h4>
+<app-receber-curso-criado></app-receber-curso-criado>
+
+<input type="text" #cursoInp>
+<button (click)="onAddCurso(cursoInp.value)">Add Curso</button>
+<!--como estão em instâncias separadas, só adiciona na do criar cursos
+  caso estivesse em apenas uma (nos modules locais ou gerais)
+  adicionaria o valor para as duas listas-->
