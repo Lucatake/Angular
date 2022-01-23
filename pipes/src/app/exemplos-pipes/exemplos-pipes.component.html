@@ -1,0 +1,52 @@
+<h3>Exemplos de Pipes |</h3>
+<!--pipes transformam um valor que pode ser usado/mostrado dentro de um template (BrowserModule)-->
+
+<h4>Pipes embutidos</h4>
+<p>Título: {{ livro.titulo | uppercase | lowercase |camelCase }}</p> <!--ordem dos pipes é a de execução-->
+<p>Estrelas: {{ livro.rating | number:'2.1-1' }}</p>
+<p>Páginas: {{ livro.numeroPaginas | number }}</p>
+<p>Preço: {{ livro.preco | currency:'BRL' }}</p>
+<p>Data de Lançamento: {{ livro.dataLancamento | date }}</p>
+<p>Url: {{ livro.url }}</p>
+<p>Livro: {{ livro | json }}</p>
+<!--Aplicar o Locale (para padronizar os valores/datas etc para a localização-->
+<br><br>
+
+<h4>Pipes Criados</h4>
+<h5>Filtro de Array</h5>
+<input type="text" [(ngModel)]="filtro">
+<h5>Adicionar livros</h5>
+<input type="text" #novoValor>
+<button (click)="addLivro(novoValor.value)">Add Curso</button>
+
+<h4>Pipe puro</h4>
+<ul>
+  <!--obs: Não fazer pipes/filtros para arrays-->
+  <li *ngFor="let liv of livros | filtroArray: filtro">
+    {{ liv }}
+  </li>
+</ul>
+<!--Pipe Puro: não olha as modificações do valor que é passado como parâmetro no metodo de transform (no objeto)-->
+<!--Pipe Impuro: escuta as mudanças e realizar as atualizações-->
+<h4>Pipe impuro</h4>
+<ul>
+  <!--obs: Não fazer pipes/filtros para arrays-->
+  <li *ngFor="let liv of livros | filtroArrayImpuro: filtro">
+    {{ liv }}
+  </li>
+</ul>
+<!--Não usar pipes para filtros em arrays nem orderBy-->
+<h4>Maneira correta de usar filtro nos projetos</h4>
+<ul>
+  <!--obs: Não fazer pipes/filtros para arrays-->
+  <li *ngFor="let livr of obterLivros()">
+    {{ livr }}
+  </li>
+</ul>
+
+<br><br>
+<h4>Pipes Async - assíncrono</h4>
+<p> Valor assíncrono: {{ valorAsync }} </p>
+<!--async aguarada os 2 segundos, o valor chegar para ser exibido-->
+<p> Valor assíncrono com | async: {{ valorAsync | async }} </p>
+<p *ngFor="let valor of valorAsync2"> Valor assíncrono com | async: {{ valor }} </p>
