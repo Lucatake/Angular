@@ -1,0 +1,11 @@
+<h5>Rotas Imperativas</h5>
+<h5>Lista de Cursos</h5>
+<div class="container collection">
+  <a class="collection-item"
+    *ngFor="let curso of cursos"
+    [routerLink]="['/cursos', curso.id]">
+    {{ curso.id }} : {{ curso.nome }}
+  </a>
+</div>
+<p>Página: {{ pagina }}</p>
+<button (click)="proximaPagina()">Próxima</button>
