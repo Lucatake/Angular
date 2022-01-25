@@ -6,19 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./template-form.component.css']
 })
 export class TemplateFormComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   usuario: any = {
     nome: null,
     email: null
   };
 
-  onSubmit(form: any){
+  constructor(
 
+  ) { }
+
+  ngOnInit() {
   }
 
+  verificaValidTouched(campo: any) {
+    return !campo.valid && campo.touched;
+  }
+
+  aplicaCssErro(campo: any) {
+    return {
+      'is-invalid': this.verificaValidTouched(campo),
+    };
+  }
 }
