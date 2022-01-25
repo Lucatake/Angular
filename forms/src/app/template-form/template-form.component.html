@@ -1,0 +1,16 @@
+<br><h4>Template Form</h4><br>
+<form #forms="ngForm" (ngSubmit)="onSubmit(forms)">
+  <div class="form-group mb-3">
+    <label for="nome">Nome</label>
+    <input type="text" class="form-control" id="nome"
+    placeholder="Nome" name="nome" ngModel>
+  </div>
+
+  <div class="form-group mb-3">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="email"
+    placeholder="exemplo@email.com" name="email" ngModel>
+  </div>
+
+  <button type="submit" class="btn btn-dark">Enviar</button>
+</form>
