@@ -40,7 +40,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  //hash para padrão de url com # - as vezes necessário p/ backend
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
