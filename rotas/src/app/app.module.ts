@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import 'materialize-css';
 import { CabecalhoComponent } from './cabecalho/cabecalho.component';
 import { AuthService } from './login/auth.service';
+import { AuthGuard } from './guard/auth-guard';
 //import { Cursos } from './cursos/cursos.module';
 //import { Alunos } from './alunos/alunos.module';
 //import { AlunoDetalheComponent } from './alunos/aluno-detalhe/aluno-detalhe.component';
@@ -40,7 +41,8 @@ import { AuthService } from './login/auth.service';
     //Alunos
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
     //CursosService
   ],
   bootstrap: [AppComponent]
