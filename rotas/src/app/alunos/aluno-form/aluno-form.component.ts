@@ -35,4 +35,16 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
     this.inscricao.unsubscribe();
   }
 
+  formMudou: boolean = false;
+
+  onInput(){
+    this.formMudou = true;
+  }
+
+  podeMudarRota(){
+    if (this.formMudou){
+      confirm('Tem certeza que deseja sair da página?');
+    }
+    return true;
+  }
 }
