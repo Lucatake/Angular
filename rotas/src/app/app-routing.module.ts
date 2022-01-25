@@ -6,13 +6,12 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guard/auth-guard';
 import { CursosGuard } from './guard/cursos-guard';
 import { AlunosGuard } from './guard/alunos-guard';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 //import { CursosComponent } from './cursos/cursos.component';
 //import { CursoDetalheComponent } from './cursos/curso-detalhe/curso-detalhe.component';
 //import { CursoNaoEncontradoComponent } from './cursos/curso-nao-encontrado/curso-nao-encontrado.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent,
-    canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   //lazy loading
   { path: 'cursos',
@@ -26,9 +25,18 @@ const routes: Routes = [
     canLoad: [AuthGuard]
     //canActivateChild: [AlunosGuard]
   },
+  //rota padrão e redirecionamento
+  { path: 'home', component: HomeComponent,
+    canActivate: [AuthGuard]},
+  { path: '', redirectTo:'/home', pathMatch: 'full' },
+  //ler pathmatch na documentação
   //{ path: 'cursos', component: CursosComponent },
   //{ path: 'curso/:id', component: CursoDetalheComponent },
   //{ path: 'naoencontrado', component: CursoNaoEncontradoComponent }
+  //para quando nao encontra um caminho - wildcard
+  { path: '**', component: PaginaNaoEncontradaComponent }
+  //ou redirecionar para pagina de login
+  //{ path: '**', component: LoginComponent }
 ];
 
 @NgModule({
