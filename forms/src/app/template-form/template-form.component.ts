@@ -32,7 +32,6 @@ export class TemplateFormComponent implements OnInit {
 
   consultarCEP(cep: any, forms: any){
     cep = cep.value.replace(/\D/g, '');
-    console.log(cep);
 
     if (cep != "") {
       var validacep = /^[0-9]{8}$/;
@@ -88,5 +87,12 @@ export class TemplateFormComponent implements OnInit {
         estado: null
       }
     });
+  }
+
+  onSubmit(forms: any){
+    //simulação de post
+    this.http.post('https://httpbin.org/post', JSON.stringify(forms.form.value))
+    .pipe(res => res)
+    .subscribe((dados: any) => console.log(`sucesso!: ${dados}`));
   }
 }
