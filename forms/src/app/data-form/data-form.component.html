@@ -29,7 +29,8 @@
     <div class="col-md-3">
       <label for="cep" class="control-label">CEP</label>
       <input type="text" class="form-control" id="cep"
-        formControlName="cep">
+        formControlName="cep"
+        (blur)="consultarCEP()">
     </div>
 
     <div class="col-md-3">

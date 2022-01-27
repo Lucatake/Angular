@@ -62,5 +62,47 @@ export class DataFormComponent implements OnInit {
     this.form.reset();
   }
 
+  consultarCEP(){
+    let cep = this.form.get('endereco.cep')?.value;
+    cep = cep.replace(/\D/g, '');
+
+    if (cep != "") {
+      var validacep = /^[0-9]{8}$/;
+
+      this.resetaDadosForm();
+
+      if(validacep.test(cep)) {
+        this.http.get(`https://viacep.com.br/ws/${cep}/json`)
+        .subscribe((dados: any) => {
+          this.populaDadosForm(dados)
+        });
+      }
+    }
+  }
+
+  resetaDadosForm(){
+    this.form.patchValue({
+      endereco: {
+        rua: null,
+        bairro: null,
+        cidade: null,
+        estado: null
+      }
+    });
+  }
+
+  populaDadosForm(dados: any){
+      this.form.patchValue({
+        endereco: {
+          rua: dados.logradouro,
+          bairro: dados.bairro,
+          cidade: dados.localidade,
+          estado: dados.uf
+        }
+      });
+
+      //settar campo isolado com setValue()
+      //this.form.get('nome')?.setValue('Luana');
+  }
 
 }
