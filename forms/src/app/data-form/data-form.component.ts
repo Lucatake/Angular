@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-data-form',
@@ -22,13 +22,27 @@ export class DataFormComponent implements OnInit {
     //criar form com FormControl
     /*this.form = new FormGroup({
       nome: new FormControl(null),
-      email: new FormControl(null)
+      email: new FormControl(null),
+      endereco: new FormGroup({
+        cep: new FormControl(null),
+      })
     });*/
 
     //criar form com FormBuilder
     this.form = this.formBuilder.group({
-      nome: [null],
-      email: [null]
+      nome: [null, Validators.required],
+      //[Validators.required, Validators.minLength(3), Validators.maxLength(20)]
+      email: [null, [Validators.required, Validators.email]],
+      //Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+      endereco: this.formBuilder.group({
+        cep: [null, Validators.required],
+        numero: [null, Validators.required],
+        complemento: [null],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required]
+      })
     });
   }
 
@@ -47,5 +61,6 @@ export class DataFormComponent implements OnInit {
   resetForm(){
     this.form.reset();
   }
+
 
 }

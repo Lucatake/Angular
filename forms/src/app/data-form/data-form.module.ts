@@ -4,11 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { DataFormComponent } from './data-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormDebugComponent } from '../form-debug/form-debug.component';
 
 
 @NgModule({
   declarations: [
-    DataFormComponent
+    DataFormComponent,
+    FormDebugComponent
   ],
   imports: [
     CommonModule,
