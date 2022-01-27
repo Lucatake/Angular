@@ -64,9 +64,9 @@ export class DataFormComponent implements OnInit {
 
   consultarCEP(){
     let cep = this.form.get('endereco.cep')?.value;
-    cep = cep.replace(/\D/g, '');
+    cep = cep?.replace(/\D/g, '');
 
-    if (cep != "") {
+    if (cep != "" && cep != null) {
       var validacep = /^[0-9]{8}$/;
 
       this.resetaDadosForm();
@@ -105,4 +105,22 @@ export class DataFormComponent implements OnInit {
       //this.form.get('nome')?.setValue('Luana');
   }
 
+  verificaValidTouched(campo: string) {
+    //this.form.controls[campo];  this.form.get(campo);
+    return !this.form.get(campo)?.valid && this.form.get(campo)?.touched;
+  }
+
+  aplicaCssErro(campo: string) {
+    return {
+      'is-invalid': this.verificaValidTouched(campo),
+    };
+  }
+
+  //formato do email - caso não válido
+  validaEmail(){
+    let campoEmail = this.form.get('email');
+        if(campoEmail?.errors){
+      return campoEmail?.errors['email'] && campoEmail.touched;
+    }
+  }
 }
