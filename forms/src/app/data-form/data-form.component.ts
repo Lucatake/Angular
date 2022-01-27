@@ -47,15 +47,36 @@ export class DataFormComponent implements OnInit {
   }
 
   onSubmit(){
-    //simulação de post
-    this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value))
-    .pipe(res => res)
-    .subscribe((dados: any) => {
-      console.log(`sucesso!: ${dados}`);
-      this.resetForm();
-    }),
-    //nao resetar o form após submit caso erro
-    (error: any) => alert('erro!');
+    if(this.form.valid){
+      //simulação de post
+      this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value))
+      .pipe(res => res)
+      .subscribe((dados: any) => {
+        console.log(`sucesso!: ${dados}`);
+        this.resetForm();
+      }),
+      //nao resetar o form após submit caso erro
+      (error: any) => alert('erro!');
+    } else {
+      //funciona apenas para campos controle em primeira instância
+      /*Object.keys(this.form.controls).forEach(campo => {
+        const control = this.form.get(campo);
+        control?.markAsDirty();
+      });*/
+      this.verificaValidacoes(this.form);
+    }
+  }
+
+  verificaValidacoes(formGroup: FormGroup){
+    Object.keys(formGroup.controls).forEach(campo => {
+      const control = formGroup.get(campo);
+      control?.markAsDirty();
+      //para verificar recursivamente os outros grupos e campos controles
+      if (control instanceof FormGroup){
+        this.verificaValidacoes(control);
+      }
+    });
+    
   }
 
   resetForm(){
@@ -107,7 +128,8 @@ export class DataFormComponent implements OnInit {
 
   verificaValidTouched(campo: string) {
     //this.form.controls[campo];  this.form.get(campo);
-    return !this.form.get(campo)?.valid && this.form.get(campo)?.touched;
+    //valido, tocado ou modificado
+    return !this.form.get(campo)?.valid && (this.form.get(campo)?.touched || this.form.get(campo)?.dirty);
   }
 
   aplicaCssErro(campo: string) {
@@ -123,4 +145,6 @@ export class DataFormComponent implements OnInit {
       return campoEmail?.errors['email'] && campoEmail.touched;
     }
   }
+
+
 }
