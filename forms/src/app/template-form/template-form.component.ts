@@ -43,7 +43,10 @@ export class TemplateFormComponent implements OnInit {
       if(validacep.test(cep)) {
         this.http.get(`https://viacep.com.br/ws/${cep}/json`)
         //.pipe(map((dados: any) => dados)) não é mais necessário -> já traz no formato json
-        .subscribe((dados: any) => this.populaDadosForm(dados, forms));
+        .subscribe((dados: any) => {
+          this.populaDadosForm(dados, forms)
+          forms.form.reset();
+        });
       }
     }
   }
