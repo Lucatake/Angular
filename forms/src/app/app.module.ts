@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TemplateFormModule } from './template-form/template-form.module';
 import { DataFormModule } from './data-form/data-form.module';
+import { SharedModule } from './shared/shared.module';
 //import { TemplateFormComponent } from './template-form/template-form.component';
 
 
@@ -27,7 +28,8 @@ import { DataFormModule } from './data-form/data-form.module';
     FormsModule,
     TemplateFormModule,
     ReactiveFormsModule,
-    DataFormModule
+    DataFormModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

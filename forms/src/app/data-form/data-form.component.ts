@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DropdownService } from '../shared/services/dropdown.service';
 
 @Component({
   selector: 'app-data-form',
@@ -11,10 +12,13 @@ export class DataFormComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
 
+  estados:; ->>> minuto 10
+
   constructor(
     //criar form com FormBuilder
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private dropDownService: DropdownService
     ) { }
 
   ngOnInit() {
@@ -76,7 +80,6 @@ export class DataFormComponent implements OnInit {
         this.verificaValidacoes(control);
       }
     });
-    
   }
 
   resetForm(){
@@ -145,6 +148,7 @@ export class DataFormComponent implements OnInit {
       return campoEmail?.errors['email'] && campoEmail.touched;
     }
   }
+
 
 
 }

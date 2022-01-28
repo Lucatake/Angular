@@ -9,12 +9,12 @@
             id="nome" [ngClass]="aplicaCssErro('nome')">
         </div>
     </div>
-    
+
     <div class="form-group row">
         <div class="col-sm-12">
           <label for="email" class="control-label">Email</label>
         </div>
-    
+
         <div class="col-sm-12">
           <input type="email" class="form-control" formControlName="email"
             id="email" [ngClass]="aplicaCssErro('email')">
@@ -56,7 +56,7 @@
     </div>
     <div class="col-sm-12">
       <input type="text" class="form-control" formControlName="rua"
-        id="rua" readonly>
+        id="rua">
      </div>
   </div>
 
@@ -64,19 +64,19 @@
     <div class="col-md-5">
       <label for="bairro" class="control-label">Bairro</label>
       <input type="text" class="form-control" id="bairro"
-        formControlName="bairro" readonly>
+        formControlName="bairro">
     </div>
 
     <div class="col-md-4">
       <label for="cidade" class="control-label">Cidade</label>
       <input type="text" class="form-control" id="cidade"
-        formControlName="cidade" readonly>
+        formControlName="cidade">
     </div>
 
     <div class="col-md-3">
       <label for="estado" class="control-label">Estado</label>
       <input type="text" class="form-control" id="estado"
-        formControlName="estado" readonly>
+        formControlName="estado">
     </div>
   </div>
 
@@ -84,14 +84,14 @@
 
   <br>
   <div class="form-group container row">
-    <div class="col"> 
-      <button type="submit" class="btn btn-dark">Submit</button>    
+    <div class="col">
+      <button type="submit" class="btn btn-dark">Submit</button>
     </div>
     <div class="col col-md-2">
       <button class="btn btn-dark" (click)="resetForm()">Reset</button>
     </div>
   </div>
-  
+
 
   <app-form-debug [form]="form"></app-form-debug>
 </form>
