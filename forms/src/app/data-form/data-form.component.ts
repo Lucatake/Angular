@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { EstadoBr } from '../shared/models/estado-br';
 import { DropdownService } from '../shared/services/dropdown.service';
 
 @Component({
@@ -11,8 +13,9 @@ import { DropdownService } from '../shared/services/dropdown.service';
 export class DataFormComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
-
-  estados:; ->>> minuto 10
+  estados: EstadoBr[] = [];
+  //pipe async
+  //estados: Observable<EstadoBr[]> = new Observable();
 
   constructor(
     //criar form com FormBuilder
@@ -22,6 +25,12 @@ export class DataFormComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+    //melhor fazer a chamada async
+    this.dropDownService.getEstadosBR()
+    .subscribe((dados: any) => this.estados = dados);
+    //this.estados = this.dropDownService.getEstadosBR();
+    //pipe async faz automaticamente o subscrite e unsubscribe
 
     //criar form com FormControl
     /*this.form = new FormGroup({
