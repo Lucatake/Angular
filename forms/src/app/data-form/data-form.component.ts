@@ -57,6 +57,7 @@ export class DataFormComponent implements OnInit {
       nome: [null, Validators.required],
       //[Validators.required, Validators.minLength(3), Validators.maxLength(20)]
       email: [null, [Validators.required, Validators.email]],
+      confirmarEmail: [null, [FormValidation.equalsTo('email')]],
       //Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
       endereco: this.formBuilder.group({
         cep: [null, [Validators.required, FormValidation.cepValidator]],

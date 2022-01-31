@@ -1,4 +1,4 @@
-import { AbstractControl, FormArray, FormControl, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
 
 export class FormValidation{
 
@@ -34,5 +34,25 @@ export class FormValidation{
       return validacep.test(cep) ? null : {cepInvalido : true};
     }
     return null;
+  }
+
+  static equalsTo(otherField: string){
+    const validator = (formControl: AbstractControl) => {
+      if (otherField == null){
+        throw new Error('necessário informar o campo.');
+      }
+      if (!formControl.root || !(<FormGroup>formControl.root).controls){
+        return null;
+      }
+        const field = (<FormGroup>formControl.root).get(otherField);
+      if (!field){
+        throw new Error('necessário informar um campo válido.');
+      }
+      if (field.value !== formControl.value){
+        return { equalsTo: otherField };
+      }
+      return null;
+    };
+    return validator;
   }
 }

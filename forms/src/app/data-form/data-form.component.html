@@ -14,7 +14,6 @@
         <div class="col-sm-12">
           <label for="email" class="control-label">Email</label>
         </div>
-
         <div class="col-sm-12">
           <input type="email" class="form-control" formControlName="email"
             id="email" [ngClass]="aplicaCssErro('email')">
@@ -22,6 +21,18 @@
         <app-campo-control-error [mostrarErro]="validaEmail() || verificaValidTouched('email')"
         msgErro="Email válido"></app-campo-control-error>
     </div>
+
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <label for="confirmarEmail" class="control-label">Confirmar Email</label>
+      </div>
+      <div class="col-sm-12">
+        <input type="confirmarEmail" class="form-control" formControlName="confirmarEmail"
+          id="confirmarEmail" [ngClass]="aplicaCssErro('confirmarEmail')">
+      </div>
+      <app-campo-control-error [mostrarErro]="form.get('confirmarEmail')?.hasError('equalsTo') ? true : false"
+      msgErro="Email igual"></app-campo-control-error>
+  </div>
 
 
   <div formGroupName="endereco">
