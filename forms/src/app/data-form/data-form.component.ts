@@ -1,3 +1,4 @@
+import { VerificaEmailService } from './services/verifica-email.service';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, TrackByFunction } from '@angular/core';
@@ -28,10 +29,12 @@ export class DataFormComponent implements OnInit {
     //criar form com FormBuilder
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dropDownService: DropdownService
+    private dropDownService: DropdownService,
+    private verificaEmail: VerificaEmailService
     ) { }
 
   ngOnInit() {
+    //this.verificaEmail.verificarEmail('').subscribe;
 
     //melhor fazer a chamada async
     this.dropDownService.getEstadosBR()
@@ -56,7 +59,7 @@ export class DataFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       nome: [null, Validators.required],
       //[Validators.required, Validators.minLength(3), Validators.maxLength(20)]
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required, Validators.email], [this.verificarEmail.bind(this)]],
       confirmarEmail: [null, [FormValidation.equalsTo('email')]],
       //Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
       endereco: this.formBuilder.group({
@@ -208,5 +211,12 @@ export class DataFormComponent implements OnInit {
 
   setarTecnologia(){
     this.form.get('tecnologia')?.setValue(['c', 'java']);
+  }
+
+  verificarEmail(formControl: FormControl){
+    return this.verificaEmail.verificarEmail(formControl.value)
+    .pipe(
+      map(emailExiste => emailExiste ? { emailInvalido: true } : null )
+    );
   }
 }
