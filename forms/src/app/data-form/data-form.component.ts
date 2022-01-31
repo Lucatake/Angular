@@ -1,10 +1,12 @@
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, TrackByFunction } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { EstadoBr } from '../shared/models/estado-br';
 import { DropdownService } from '../shared/services/dropdown.service';
+import { __values } from 'tslib';
+import { FormValidation } from '../shared/services/form-validation';
 
 @Component({
   selector: 'app-data-form',
@@ -76,7 +78,7 @@ export class DataFormComponent implements OnInit {
   buildFrameworks(){
     const values = this.frameworks.map(v => new FormControl(false));
 
-    return this.formBuilder.array(values);
+    return this.formBuilder.array(values, FormValidation.requiredMinCheckbox(1));
     /*return[
       new FormControl(false),
       new FormControl(false),
