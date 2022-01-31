@@ -1,6 +1,7 @@
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, TrackByFunction } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { EstadoBr } from '../shared/models/estado-br';
 import { DropdownService } from '../shared/services/dropdown.service';
@@ -19,6 +20,7 @@ export class DataFormComponent implements OnInit {
   tech: any[] = [];
   cargos: any[] = [];
   newsop: any[] = [];
+  frameworks: string[] = ['Angular', 'React', 'Vue', 'Sencha'];
 
   constructor(
     //criar form com FormBuilder
@@ -37,6 +39,7 @@ export class DataFormComponent implements OnInit {
     this.tech = this.dropDownService.getTecnologias();
     this.cargos = this.dropDownService.getCargos();
     this.newsop = this.dropDownService.getNews();
+
 
     //criar form com FormControl
     /*this.form = new FormGroup({
@@ -65,11 +68,34 @@ export class DataFormComponent implements OnInit {
       cargo: [null],
       tecnologia: [null],
       news: ['s'],
-      termos: [null, Validators.requiredTrue]
+      termos: [null, Validators.requiredTrue],
+      frameworks: this.buildFrameworks()
     });
   }
 
+  buildFrameworks(){
+    const values = this.frameworks.map(v => new FormControl(false));
+
+    return this.formBuilder.array(values);
+    /*return[
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+    ]*/
+  }
+  getControls() {
+    return (this.form.get('frameworks') as FormArray)?.controls;
+  }
+
   onSubmit(){
+    let valueSubmit = Object.assign({}, this.form.value);
+    valueSubmit = Object.assign(valueSubmit, {
+      frameworks: valueSubmit.frameworks
+      .map((v: any, i: any) => v ? this.frameworks[i] : null)
+      .filter((v: any) => v != null)
+    });
+
     if(this.form.valid){
       //simulação de post
       this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value))
