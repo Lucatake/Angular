@@ -8,6 +8,7 @@
           <input type="text" class="form-control" formControlName="nome"
             id="nome" [ngClass]="aplicaCssErro('nome')">
         </div>
+        <app-error-message [control]="$any(form.get('nome'))" label="Nome"></app-error-message>
     </div>
 
     <div class="form-group row">
@@ -18,15 +19,16 @@
           <input type="email" class="form-control" formControlName="email"
             id="email" [ngClass]="aplicaCssErro('email')">
         </div>
-        <app-campo-control-error [mostrarErro]="validaEmail() || verificaValidTouched('email')"
-        msgErro="Email válido"></app-campo-control-error>
+        <app-error-message [control]="$any(form.get('email'))" label="Email"></app-error-message>
+        <!--app-campo-control-error [mostrarErro]="validaEmail() || verificaValidTouched('email')"
+        msgErro="Email válido"></app-campo-control-error-->
         <!--Tratamento de erros validações assíncronas-->
-        <app-campo-control-error [validacao]="form.get('email')?.status === 'PENDING'"
+        <!--app-campo-control-error [validacao]="form.get('email')?.status === 'PENDING'"
         msgErro="Validando email"></app-campo-control-error>
         <app-campo-control-error [validacao]="form.get('email')?.status === 'VALID'"
         msgErro="Email válido"></app-campo-control-error>
         <app-campo-control-error [validacao]="form.get('email')?.hasError('emailInvalido') ? true : false"
-        msgErro="Email inválido"></app-campo-control-error>
+        msgErro="Email inválido"></app-campo-control-error-->
     </div>
 
     <div class="form-group row">
@@ -37,8 +39,9 @@
         <input type="confirmarEmail" class="form-control" formControlName="confirmarEmail"
           id="confirmarEmail" [ngClass]="aplicaCssErro('confirmarEmail')">
       </div>
-      <app-campo-control-error [mostrarErro]="form.get('confirmarEmail')?.hasError('equalsTo') ? true : false"
-      msgErro="Email igual"></app-campo-control-error>
+      <!--app-campo-control-error [mostrarErro]="form.get('confirmarEmail')?.hasError('equalsTo') ? true : false"
+      msgErro="Email igual"></app-campo-control-error-->
+      <app-error-message [control]="$any(form.get('confirmarEmail'))" label="Confirmar Email"></app-error-message>
   </div>
 
 
@@ -51,12 +54,14 @@
       <input type="text" class="form-control" id="cep"
         formControlName="cep" [ngClass]="aplicaCssErro('endereco.cep')"
         (blur)="consultarCEP()">
+    <app-error-message [control]="$any(form.get('endereco.cep'))" label="CEP"></app-error-message>
     </div>
 
     <div class="col-md-3">
       <label for="numero" class="control-label">Número</label>
       <input type="text" class="form-control" id="numero"
         formControlName="numero" [ngClass]="aplicaCssErro('endereco.numero')">
+      <app-error-message [control]="$any(form.get('endereco.numero'))" label="Número"></app-error-message>
     </div>
 
     <div class="col-md-6">
@@ -64,7 +69,6 @@
       <input type="text" class="form-control" id="complemento"
         formControlName="complemento">
     </div>
-
   </div>
 
   <div class="form-group row">
@@ -129,6 +133,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <div class="form-group row">

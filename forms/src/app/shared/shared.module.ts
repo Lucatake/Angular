@@ -6,6 +6,7 @@ import { CampoControlErrorComponent } from './campo-control-error/campo-control-
 import { DropdownService } from './services/dropdown.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ConsultaCepService } from './services/consulta-cep.service';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 
 
@@ -13,6 +14,7 @@ import { ConsultaCepService } from './services/consulta-cep.service';
   declarations: [
     FormDebugComponent,
     CampoControlErrorComponent,
+    ErrorMessageComponent,
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { ConsultaCepService } from './services/consulta-cep.service';
   ],
   exports: [
     FormDebugComponent,
-    CampoControlErrorComponent
+    CampoControlErrorComponent,
+    ErrorMessageComponent,
   ],
   providers: [
     DropdownService,
