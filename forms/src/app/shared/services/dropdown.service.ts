@@ -33,4 +33,11 @@ export class DropdownService {
       {nome: 'c', desc: 'C'}
     ];
   }
+
+  getNews(){
+    return [
+      {nome: 's', desc: 'Sim'},
+      {nome: 'n', desc: 'Não'}
+    ];
+  }
 }

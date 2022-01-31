@@ -101,6 +101,17 @@
     </select>
   </div>
 
+  <div class="col-md-3">
+    <label for="news" class="control-label">NewsLetter</label>
+    <div id="news" class="row">
+      <div class="col-sm-4" *ngFor="let newo of newsop">
+        <label class="radio-inline">
+          <input type="radio" formControlName="news" [value]="newo.nome"/>{{ newo.desc }}
+        </label>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 
