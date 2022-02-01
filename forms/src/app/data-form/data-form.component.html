@@ -92,10 +92,17 @@
         formControlName="bairro">
     </div>
 
-    <div class="col-md-4">
+    <!--div class="col-md-4">
       <label for="cidade" class="control-label">Cidade</label>
       <input type="text" class="form-control" id="cidade"
         formControlName="cidade">
+    </div--->
+    <div class="col-md-4">
+      <label for="cidade" class="control-label">Cidade</label>
+      <select type="text" class="form-control" id="cidade"
+        formControlName="cidade">
+        <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{ cidade.nome }}</option>
+      </select>
     </div>
 
     <div class="col-md-3">

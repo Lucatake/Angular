@@ -9,6 +9,7 @@ import { EstadoBr } from '../shared/models/estado-br';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { FormValidation } from '../shared/services/form-validation';
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
+import { CidadeBr } from '../shared/models/cidades-br';
 
 @Component({
   selector: 'app-data-form',
@@ -21,6 +22,8 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
   estados: EstadoBr[] = [];
   //pipe async
   //estados: Observable<EstadoBr[]> = new Observable();
+  cidades: CidadeBr[] = [];
+
   tech: any[] = [];
   cargos: any[] = [];
   newsop: any[] = [];
@@ -86,7 +89,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     this.form.get('endereco.cep')?.statusChanges
     .pipe(
       distinctUntilChanged(),
-      tap(value => console.log('status')),
+      //tap(value => console.log('status')),
       //em vez de alinhar dois observables
       switchMap(status => status === 'VALID' ?
       this.consultaCep.consultaCEP(this.form.get('endereco.cep')?.value)
@@ -99,7 +102,18 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
           .subscribe(dados => this.populaDadosForm(dados))
         }*/
     });
+
+    this.form.get('endereco.estado')?.valueChanges
+    .pipe(
+      map(estado => this.estados.filter(e => e.sigla === estado)),
+      map(estados => estados && estados.length > 0 ? estados[0].id : 0),
+      switchMap((estadoId: number) => this.dropDownService.getCidadesBR(estadoId)),
+      //tap(console.log)
+    )
+    .subscribe(cidades => this.cidades = cidades);
   }
+
+
 
   buildFrameworks(){
     const values = this.frameworks.map(v => new FormControl(false));
@@ -242,5 +256,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
       map(emailExiste => emailExiste ? { emailInvalido: true } : null )
     );
   }
+
+
 
 }
