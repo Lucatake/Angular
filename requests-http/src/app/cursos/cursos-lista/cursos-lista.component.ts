@@ -21,7 +21,7 @@ export class CursosListaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //subscribe manual
+    //subscribe manual - necessário desincrever para não sobrecarregar
     /*this.service.list()
     .pipe(
       tap(console.log)
