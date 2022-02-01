@@ -103,6 +103,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
         }*/
     });
 
+    //combobox aninhado
     this.form.get('endereco.estado')?.valueChanges
     .pipe(
       map(estado => this.estados.filter(e => e.sigla === estado)),
@@ -112,8 +113,6 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     )
     .subscribe(cidades => this.cidades = cidades);
   }
-
-
 
   buildFrameworks(){
     const values = this.frameworks.map(v => new FormControl(false));
