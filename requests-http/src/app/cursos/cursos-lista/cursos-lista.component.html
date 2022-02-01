@@ -1,18 +1,33 @@
-<br><br>
+<br />
 <div class="text-white bg-dark mt-3">
   <div class="card-header">
     <div class="float-left">
       <h4>Cursos</h4>
     </div>
     <div class="float-right float-end">
-      <button type="button" class="btn btn-outline-success btn-sm" [routerLink]="['novo']">Novo Curso</button>
+      <button
+        type="button"
+        class="btn btn-outline-success btn-sm"
+        [routerLink]="['novo']"
+      >
+        Novo Curso
+      </button>
 
-      <button type="button" class="btn btn-secondary btn-outline-warning btn-sm" (click)="onRefresh()">Atualizar</button>
+      <button
+        type="button"
+        class="btn btn-secondary btn-outline-warning btn-sm"
+        (click)="onRefresh()"
+      >
+        Atualizar
+      </button>
     </div>
-    <br>
+    <br />
   </div>
   <div class="card-body">
-    <table class="table table-bordered table-dark table-md table-hover" *ngIf="cursos$ | async as cursos; else loading">
+    <table
+      class="table table-bordered table-dark table-md table-hover"
+      *ngIf="cursos$ | async as cursos; else loading"
+    >
       <thead>
         <tr>
           <th>#</th>
@@ -42,10 +57,14 @@
 </div>
 
 <ng-template #loading>
+  <span>Carregando Cursos...</span>
+</ng-template>
+
+<!--ng-template #loading>
   <div *ngIf="error$ | async; else loadingNoError">
     Erro ao carregar cursos. Tente mais tarde.
   </div>
   <ng-template #loadingNoError>
     <span>Carregando Cursos...</span>
   </ng-template>
-</ng-template>
+</ng-template-->
