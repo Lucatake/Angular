@@ -8,15 +8,16 @@ import { empty, Observable } from 'rxjs';
 import { EstadoBr } from '../shared/models/estado-br';
 import { DropdownService } from '../shared/services/dropdown.service';
 import { FormValidation } from '../shared/services/form-validation';
+import { BaseFormComponent } from '../shared/base-form/base-form.component';
 
 @Component({
   selector: 'app-data-form',
   templateUrl: './data-form.component.html',
   styleUrls: ['./data-form.component.css']
 })
-export class DataFormComponent implements OnInit {
+export class DataFormComponent extends BaseFormComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({});
+  //form: FormGroup = new FormGroup({});
   estados: EstadoBr[] = [];
   //pipe async
   //estados: Observable<EstadoBr[]> = new Observable();
@@ -32,9 +33,11 @@ export class DataFormComponent implements OnInit {
     private dropDownService: DropdownService,
     private verificaEmail: VerificaEmailService,
     private consultaCep: ConsultaCepService
-    ) { }
+    ) {
+      super();
+    }
 
-  ngOnInit() {
+  override ngOnInit() {
     //this.verificaEmail.verificarEmail('').subscribe;
 
     //melhor fazer a chamada async
@@ -113,7 +116,8 @@ export class DataFormComponent implements OnInit {
     return (this.form.get('frameworks') as FormArray)?.controls;
   }
 
-  onSubmit(){
+  submit() {
+  //onSubmit(){
     let valueSubmit = Object.assign({}, this.form.value);
     valueSubmit = Object.assign(valueSubmit, {
       frameworks: valueSubmit.frameworks
@@ -121,7 +125,7 @@ export class DataFormComponent implements OnInit {
       .filter((v: any) => v != null)
     });
 
-    if(this.form.valid){
+    //if(this.form.valid){
       //simulação de post
       this.http.post('https://httpbin.org/post', JSON.stringify(this.form.value))
       .pipe(res => res)
@@ -131,17 +135,17 @@ export class DataFormComponent implements OnInit {
       }),
       //nao resetar o form após submit caso erro
       (error: any) => alert('erro!');
-    } else {
+    //} else {
       //funciona apenas para campos controle em primeira instância
       /*Object.keys(this.form.controls).forEach(campo => {
         const control = this.form.get(campo);
         control?.markAsDirty();
       });*/
-      this.verificaValidacoes(this.form);
-    }
+      //this.verificaValidacoes(this.form);
+    //}
   }
 
-  verificaValidacoes(formGroup: FormGroup){
+ /* verificaValidacoes(formGroup: FormGroup){
     Object.keys(formGroup.controls).forEach(campo => {
       const control = formGroup.get(campo);
       control?.markAsDirty();
@@ -150,11 +154,11 @@ export class DataFormComponent implements OnInit {
         this.verificaValidacoes(control);
       }
     });
-  }
+  }*/
 
-  resetForm(){
+  /*resetForm(){
     this.form.reset();
-  }
+  }*/
 
   consultarCEP(){
     let cep = this.form.get('endereco.cep')?.value;
@@ -199,25 +203,25 @@ export class DataFormComponent implements OnInit {
       //this.form.get('nome')?.setValue('Luana');
   }
 
-  verificaValidTouched(campo: string) {
+ /* verificaValidTouched(campo: string) {
     //this.form.controls[campo];  this.form.get(campo);
     //valido, tocado ou modificado
     return !this.form.get(campo)?.valid && (this.form.get(campo)?.touched || this.form.get(campo)?.dirty);
-  }
+  }*/
 
-  aplicaCssErro(campo: string) {
+ /* aplicaCssErro(campo: string) {
     return {
       'is-invalid': this.verificaValidTouched(campo),
     };
-  }
+  }*/
 
   //formato do email - caso não válido
-  validaEmail(){
+ /* validaEmail(){
     let campoEmail = this.form.get('email');
         if(campoEmail?.errors){
       return campoEmail?.errors['email'] && campoEmail.touched;
     }
-  }
+  }*/
 
   setarCargo(){
     const cargo = {nome: 'dev', nivel: 'Pleno', desc: 'Dev Pl'};
@@ -238,4 +242,5 @@ export class DataFormComponent implements OnInit {
       map(emailExiste => emailExiste ? { emailInvalido: true } : null )
     );
   }
+
 }

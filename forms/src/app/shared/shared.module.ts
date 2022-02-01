@@ -9,6 +9,7 @@ import { ConsultaCepService } from './services/consulta-cep.service';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { InputFieldComponent } from './input-field/input-field.component';
 import { FormsModule } from '@angular/forms';
+import { BaseFormComponent } from './base-form/base-form.component';
 
 
 
