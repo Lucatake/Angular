@@ -1,12 +1,12 @@
+import { ConsultaCepService } from './../shared/services/consulta-cep.service';
 import { VerificaEmailService } from './services/verifica-email.service';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, TrackByFunction } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { empty, Observable } from 'rxjs';
 import { EstadoBr } from '../shared/models/estado-br';
 import { DropdownService } from '../shared/services/dropdown.service';
-import { __values } from 'tslib';
 import { FormValidation } from '../shared/services/form-validation';
 
 @Component({
@@ -30,7 +30,8 @@ export class DataFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private dropDownService: DropdownService,
-    private verificaEmail: VerificaEmailService
+    private verificaEmail: VerificaEmailService,
+    private consultaCep: ConsultaCepService
     ) { }
 
   ngOnInit() {
@@ -76,6 +77,24 @@ export class DataFormComponent implements OnInit {
       news: ['s'],
       termos: [null, Validators.requiredTrue],
       frameworks: this.buildFrameworks()
+    });
+
+    //consultar cep com programação reativa
+    this.form.get('endereco.cep')?.statusChanges
+    .pipe(
+      distinctUntilChanged(),
+      tap(value => console.log('status')),
+      //em vez de alinhar dois observables
+      switchMap(status => status === 'VALID' ?
+      this.consultaCep.consultaCEP(this.form.get('endereco.cep')?.value)
+      : empty())
+    )
+    .subscribe(dados => dados ? this.populaDadosForm(dados) : {
+        /* (status => {
+        if (status === 'VALID'){
+          this.consultaCep.consultaCEP(this.form.get('endereco.cep')?.value)
+          .subscribe(dados => this.populaDadosForm(dados))
+        }*/
     });
   }
 
