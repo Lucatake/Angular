@@ -1,8 +1,8 @@
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, take, tap, switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Curso } from '../cursos';
 import { CursosService } from '../cursos.service';
-import { empty, Observable, Subject } from 'rxjs';
+import { EMPTY, empty, Observable, Subject } from 'rxjs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
@@ -85,7 +85,18 @@ export class CursosListaComponent implements OnInit {
 
   onDelete(curso: Curso){
     this.cursoSelecionado = curso;
-    this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
+    //this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
+    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja deletar esse curso?');
+    result$.asObservable()
+    .pipe(
+      take(1),
+      switchMap( result => result ? this.service.delete(curso.id) : EMPTY)
+    )
+    .subscribe(
+      success => {this.onRefresh(), this.alertService.showAlertSuccess('Curso removido com sucesso!');},
+      error => this.alertService.showAlertDanger('Curso não foi removido.'),
+      () => console.log('Requisição completa."')
+    );
   }
 
   //deleção física
