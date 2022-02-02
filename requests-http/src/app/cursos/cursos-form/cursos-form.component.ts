@@ -5,6 +5,7 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { CursosService } from '../cursos.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
+import { CursosCrudService } from '../cursos-crud.service';
 
 @Component({
   selector: 'app-cursos-form',
@@ -17,7 +18,9 @@ export class CursosFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private cursosService: CursosService,
+    //Para uso do CRUD genérico
+    //private cursosService: CursosService,
+    private cursosService: CursosCrudService,
     private modalService: AlertModalService,
     private location: Location,
     private route: ActivatedRoute

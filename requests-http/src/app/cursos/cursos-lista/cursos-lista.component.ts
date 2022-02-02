@@ -7,6 +7,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CursosCrudService } from '../cursos-crud.service';
 
 @Component({
   selector: 'app-cursos-lista',
@@ -25,7 +26,9 @@ export class CursosListaComponent implements OnInit {
   error$ = new Subject<boolean>();
 
   constructor(
-    private service: CursosService,
+    //modificando para o CRUD genérico
+    //private service: CursosService,
+    private service: CursosCrudService,
     private modalService: BsModalService,
     private alertService: AlertModalService,
     private router: Router,
