@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UploadFileService } from './upload-file.service';
 import { Subscription } from 'rxjs';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-upload-file',
@@ -31,6 +32,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     }
     document.getElementById('customFileLabel')!.innerHTML =
       fileNames.join(', ');
+    this.progress = 0;
   }
 
   onUpload() {
@@ -38,7 +40,18 @@ export class UploadFileComponent implements OnInit, OnDestroy {
       this.sub = this.service
         .upload(this.files, '/api/upload')
         //.upload(this.files, 'http://localhost:8000/upload')
-        .subscribe((response) => console.log('Concluído'));
+        .subscribe((event: HttpEvent<Object>) => {
+          if (event.type === HttpEventType.Response) {
+            console.log('Concluído');
+          } else if (
+            event.type === HttpEventType.UploadProgress &&
+            event.total
+          ) {
+            const percent = Math.round((event.loaded * 100) / event.total);
+            console.log('Progresso');
+            this.progress = percent;
+          }
+        });
     }
   }
 }

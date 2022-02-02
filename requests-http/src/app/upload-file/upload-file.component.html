@@ -12,7 +12,7 @@
       multiple
     />
   </div>
-  <div class="progress text-white bg-dark">
+  <div class="progress bg-dark" style="margin-top: 20px; ">
     <div class="progress-bar" role="progressbar" [style.width]="progress + '%'">
       {{ progress }}%
     </div>
@@ -21,7 +21,7 @@
 <div style="margin-top: 10px">
   <button
     type="button"
-    class="btn btn-outline-info float-end"
+    class="btn btn-primary float-end"
     (click)="onUpload()"
     [disabled]="!files"
     >
