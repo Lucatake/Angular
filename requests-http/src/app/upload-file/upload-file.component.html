@@ -1,0 +1,38 @@
+<br /><br />
+<div style="padding: 20px" class="text-white bg-dark">
+  <div class="custom-file">
+    <label class="custom-file-label text-white bg-dark" for="customFile" id="customFileLabel"
+      >Selecionar Arquivo</label
+    >
+    <input
+      type="file"
+      class="custom-file-input text-white bg-dark float-end"
+      id="customFile"
+      (change)="onChange($event)"
+      multiple
+    />
+  </div>
+  <div class="progress text-white bg-dark">
+    <div class="progress-bar" role="progressbar" [style.width]="progress + '%'">
+      {{ progress }}%
+    </div>
+  </div>
+</div>
+<!--div style="margin-top: 10px">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="onUpload()"
+    [disabled]="!files"
+  >
+    Upload
+  </button>
+</!--div>
+<div-- style="margin-top: 10px">
+  <button type="button" class="btn btn-outline-info" (click)="onDownloadExcel()">
+    Download Excel
+  </button>
+  <button type="button" class="btn btn-outline-info" (click)="onDownloadPDF()">
+    Download PDF
+  </button>
+</div-->
