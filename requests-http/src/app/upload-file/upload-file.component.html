@@ -1,12 +1,12 @@
 <br /><br />
 <div style="padding: 20px" class="text-white bg-dark">
   <div class="custom-file">
-    <label class="custom-file-label text-white bg-dark" for="customFile" id="customFileLabel"
+    <label class="custom-file-label" for="customFile" id="customFileLabel"
       >Selecionar Arquivo</label
     >
     <input
       type="file"
-      class="custom-file-input text-white bg-dark float-end"
+      class="custom-file-input float-end"
       id="customFile"
       (change)="onChange($event)"
       multiple
@@ -18,17 +18,17 @@
     </div>
   </div>
 </div>
-<!--div style="margin-top: 10px">
+<div style="margin-top: 10px">
   <button
     type="button"
-    class="btn btn-outline-dark"
+    class="btn btn-outline-info float-end"
     (click)="onUpload()"
     [disabled]="!files"
-  >
+    >
     Upload
   </button>
-</!--div>
-<div-- style="margin-top: 10px">
+</div>
+<!--div style="margin-top: 10px">
   <button type="button" class="btn btn-outline-info" (click)="onDownloadExcel()">
     Download Excel
   </button>
