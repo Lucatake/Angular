@@ -1,0 +1,41 @@
+<br /><br />
+<div class="container search-table text-white bg-dark" style="padding: 20px">
+  <div class="search-box">
+    <div class="row">
+      <div class="col-md-10">
+        <input
+          type="text"
+          id="myInput"
+          class="form-control"
+          [formControl]="query"
+          placeholder="Pesquisar libs"
+        />
+      </div>
+      <div class="col-auto">
+        <button
+          class="but btn-lg text-black btn-outline-info"
+          (click)="onSearch()"
+        >
+          Pesquisar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="search-list">
+    <h3>Registros encontrados:</h3>
+    <table class="table text-white bg-dark" id="myTable">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Versão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
