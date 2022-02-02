@@ -36,7 +36,8 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   onUpload() {
     if (this.files && this.files.size > 0) {
       this.sub = this.service
-        .upload(this.files, 'http://localhost:8000/upload')
+        .upload(this.files, '/api/upload')
+        //.upload(this.files, 'http://localhost:8000/upload')
         .subscribe((response) => console.log('Concluído'));
     }
   }
