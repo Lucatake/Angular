@@ -1,5 +1,5 @@
 import { catchError, tap } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Curso } from '../cursos';
 import { CursosService } from '../cursos.service';
 import { empty, Observable, Subject } from 'rxjs';
@@ -16,6 +16,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CursosListaComponent implements OnInit {
 
+  deleteModalRef: BsModalRef= new BsModalRef;
+  @ViewChild('deleteModal') deleteModal: any;
+  cursoSelecionado!: Curso;
   //bsModalRef: BsModalRef= new BsModalRef;
   //cursos: Curso[] = [];
   cursos$: Observable<Curso[]> = new Observable;
@@ -23,7 +26,7 @@ export class CursosListaComponent implements OnInit {
 
   constructor(
     private service: CursosService,
-    //private modalService: BsModalService
+    private modalService: BsModalService,
     private alertService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute
@@ -78,5 +81,24 @@ export class CursosListaComponent implements OnInit {
 
   onEdit(id: number){
     this.router.navigate(['edit', id], {relativeTo: this.route});
+  }
+
+  onDelete(curso: Curso){
+    this.cursoSelecionado = curso;
+    this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
+  }
+
+  //deleção física
+  onConfirmDelete(){
+    this.service.delete(this.cursoSelecionado.id)
+    .subscribe(
+      success => {this.onRefresh(), this.alertService.showAlertSuccess('Curso removido com sucesso!');},
+      error => this.alertService.showAlertDanger('Curso não foi removido.'),
+      () => console.log('Requisição completa."')
+    );
+    this.deleteModalRef.hide();
+  }
+  onDeclineDelete(){
+    this.deleteModalRef.hide();
   }
 }
