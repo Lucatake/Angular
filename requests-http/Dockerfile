@@ -1,10 +1,14 @@
-FROM node:lts-alpine
-ENV NODE_ENV=production
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
+FROM node:latest as angular
+WORKDIR /app
+COPY package.json /app
+RUN npm install --silent
 COPY . .
-EXPOSE 3000
-RUN chown -R node /usr/src/app
-USER node
-CMD ["npm", "start"]
+RUN npm run build
+
+FROM nginx:alpine
+VOLUME /var/cache/nginx
+COPY --from=angular app/dist/requests-http /usr/share/nginx/html
+COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
+
+# docker build -t curso-angular .
+# docker run -p 8081:80 curso-angular

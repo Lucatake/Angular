@@ -1,12 +1,11 @@
-version: '3.4'
+version: '2.1'
 
 services:
-  requestshttp:
-    image: requestshttp
-    build:
-      context: requests-http
-      dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
+  curso-angular:
+    image: curso-angular
+    build: .
     ports:
-      - 3000:3000
+      - 8081:80
+
+# docker compose up roda o arquivo que constroi e executa a imagem (criada manual no dockerfile)
+# ctrl+shift+p docker compose up
