@@ -1,4 +1,13 @@
 {
+  "targets": {
+    "curso-angular-lua": {
+      "hosting": {
+        "requests-http": [
+          "curso-angular-lua"
+        ]
+      }
+    }
+  },
   "projects": {
     "default": "curso-angular-lua"
   }

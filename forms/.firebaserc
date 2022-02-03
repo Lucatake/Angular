@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-forms-lua": {
+      "hosting": {
+        "forms": [
+          "angular-forms-lua"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-forms-lua"
+  }
+}
